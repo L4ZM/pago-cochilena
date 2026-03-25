@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cochileña - Pago</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    padding: 20px;
+}
+
+h1 {
+    color: #8b4513;
+}
+
+.subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.card {
+    border: 1px solid #d4af37;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.number {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    word-break: break-all;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background: #d4af37;
+    color: black;
+    font-weight: bold;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.whatsapp {
+    background: #25D366;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Cochileña</h1>
+<div class="subtitle">Toca un botón para copiar</div>
+
+<!-- Banco Azteca -->
+<div class="card">
+    <div>Banco Azteca</div>
+    <div class="number" id="card1">4027665889581485</div>
+    <button onclick="copyText('card1', this)">Copiar tarjeta</button>
+</div>
+
+<!-- BBVA -->
+<div class="card">
+    <div>BBVA</div>
+    <div class="number" id="card2">4152314320672226</div>
+    <button onclick="copyText('card2', this)">Copiar tarjeta</button>
+</div>
+
+<button onclick="openBank()">Abrir app bancaria</button>
+
+<button class="whatsapp" onclick="sendWhats()">Enviar comprobante por WhatsApp</button>
+
+</div>
+
+<script>
+function copyText(id, btn) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text);
+
+    btn.innerText = "✔ Copiado";
+    if (navigator.vibrate) navigator.vibrate(100);
+
+    setTimeout(() => {
+        btn.innerText = "Copiar tarjeta";
+    }, 1500);
+}
+
+function openBank() {
+    window.location.href = "https://www.bbva.mx";
+}
+
+function sendWhats() {
+    const phone = "529982155292";
+    const msg = "Hola, te envío mi comprobante de pago";
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, "_blank");
+}
+</script>
+
+</body>
+</html>
