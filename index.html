@@ -1,119 +1,231 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cochileña - Pago</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cochileña - Pago</title>
+  <style>
+    :root{
+      --bg: #111111;
+      --card: #1b1b1b;
+      --gold: #d4af37;
+      --brown: #8b4513;
+      --text: #ffffff;
+      --muted: #d8d8d8;
+      --green: #25D366;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
-    text-align: center;
-}
+    *{
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-.container {
-    padding: 20px;
-}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #111 0%, #1a1208 100%);
+      color: var(--text);
+      text-align:center;
+    }
 
-h1 {
-    color: #8b4513;
-}
+    .wrap{
+      width:100%;
+      max-width:520px;
+      margin:0 auto;
+      padding:22px 16px 28px;
+    }
 
-.subtitle {
-    font-size: 14px;
-    margin-bottom: 20px;
-}
+    .logo-box{
+      margin-bottom: 10px;
+    }
 
-.card {
-    border: 1px solid #d4af37;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 20px;
-}
+    .logo{
+      width: 220px;
+      max-width: 80%;
+      height: auto;
+      display:block;
+      margin: 0 auto 8px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      padding: 8px;
+    }
 
-.number {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 10px 0;
-    word-break: break-all;
-}
+    h1{
+      margin: 4px 0 4px;
+      font-size: 30px;
+      color: var(--brown);
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
 
-button {
-    width: 100%;
-    padding: 15px;
-    margin-top: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    background: #d4af37;
-    color: black;
-    font-weight: bold;
-}
+    .subtitle{
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
 
-button:active {
-    transform: scale(0.98);
-}
+    .pay-card{
+      background: var(--card);
+      border: 1px solid var(--gold);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.22);
+    }
 
-.whatsapp {
-    background: #25D366;
-    color: white;
-}
-</style>
+    .bank{
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .number{
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: .8px;
+      line-height: 1.3;
+      word-break: break-word;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+      user-select: all;
+    }
+
+    .btn{
+      width:100%;
+      border:none;
+      border-radius:14px;
+      padding:16px 14px;
+      margin-top:10px;
+      font-size:16px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.15s ease;
+    }
+
+    .btn:active{
+      transform: scale(.98);
+    }
+
+    .btn-gold{
+      background: var(--gold);
+      color:#111;
+    }
+
+    .btn-dark{
+      background: #2a2a2a;
+      color: #fff;
+      border: 1px solid var(--gold);
+    }
+
+    .btn-whatsapp{
+      background: var(--green);
+      color:#fff;
+    }
+
+    .mini{
+      font-size: 12px;
+      color: #bdbdbd;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .ok{
+      color: #9cffb0;
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <div class="logo-box">
+      <img src="logo-cochilena.jpg" alt="Logo Cochileña" class="logo">
+    </div>
 
-<div class="container">
+    <h1>Cochileña</h1>
+    <div class="subtitle">Toca un botón para copiar</div>
 
-<h1>Cochileña</h1>
-<div class="subtitle">Toca un botón para copiar</div>
+    <div class="pay-card">
+      <div class="bank">Banco Azteca</div>
+      <div class="number" id="card1" onclick="selectText('card1')">4027 6658 8958 1485</div>
+      <button class="btn btn-gold" id="btn1" onclick="copyText('card1','btn1','Copiar tarjeta Azteca')">
+        Copiar tarjeta Azteca
+      </button>
+      <button class="btn btn-dark" onclick="openAzteca()">
+        Abrir Banco Azteca
+      </button>
+    </div>
 
-<!-- Banco Azteca -->
-<div class="card">
-    <div>Banco Azteca</div>
-    <div class="number" id="card1">4027665889581485</div>
-    <button onclick="copyText('card1', this)">Copiar tarjeta</button>
-</div>
+    <div class="pay-card">
+      <div class="bank">BBVA</div>
+      <div class="number" id="card2" onclick="selectText('card2')">4152 3143 2067 2226</div>
+      <button class="btn btn-gold" id="btn2" onclick="copyText('card2','btn2','Copiar tarjeta BBVA')">
+        Copiar tarjeta BBVA
+      </button>
+      <button class="btn btn-dark" onclick="openBBVA()">
+        Abrir BBVA
+      </button>
+    </div>
 
-<!-- BBVA -->
-<div class="card">
-    <div>BBVA</div>
-    <div class="number" id="card2">4152314320672226</div>
-    <button onclick="copyText('card2', this)">Copiar tarjeta</button>
-</div>
+    <button class="btn btn-whatsapp" onclick="sendWhats()">
+      Enviar comprobante por WhatsApp
+    </button>
 
-<button onclick="openBank()">Abrir app bancaria</button>
+    <div class="mini">
+      Toca el número para seleccionarlo rápido.
+    </div>
+  </div>
 
-<button class="whatsapp" onclick="sendWhats()">Enviar comprobante por WhatsApp</button>
+  <script>
+    async function copyText(textId, btnId, originalText){
+      const text = document.getElementById(textId).innerText.replace(/\s+/g, '');
+      const btn = document.getElementById(btnId);
 
-</div>
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.innerText = '✔ Copiado';
+        btn.classList.add('ok');
+        if (navigator.vibrate) navigator.vibrate(80);
+      } catch (e) {
+        const range = document.createRange();
+        range.selectNode(document.getElementById(textId));
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        btn.innerText = '✔ Seleccionado';
+      }
 
-<script>
-function copyText(id, btn) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text);
+      setTimeout(() => {
+        btn.innerText = originalText;
+        btn.classList.remove('ok');
+      }, 1400);
+    }
 
-    btn.innerText = "✔ Copiado";
-    if (navigator.vibrate) navigator.vibrate(100);
+    function selectText(id){
+      const el = document.getElementById(id);
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      if (navigator.vibrate) navigator.vibrate(50);
+    }
 
-    setTimeout(() => {
-        btn.innerText = "Copiar tarjeta";
-    }, 1500);
-}
+    function openAzteca(){
+      window.location.href = 'https://www.bancoazteca.com.mx/';
+    }
 
-function openBank() {
-    window.location.href = "https://www.bbva.mx";
-}
+    function openBBVA(){
+      window.location.href = 'https://www.bbva.mx/';
+    }
 
-function sendWhats() {
-    const phone = "529982155292";
-    const msg = "Hola, te envío mi comprobante de pago";
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, "_blank");
-}
-</script>
-
+    function sendWhats(){
+      const phone = '529982155292';
+      const msg = 'Hola, te envío mi comprobante de pago de Cochileña.';
+      window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
+    }
+  </script>
 </body>
 </html>
